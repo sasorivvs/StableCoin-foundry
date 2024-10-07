@@ -34,7 +34,7 @@ contract Invariants is StdInvariant, Test {
         targetContract(address(handler));
         bytes4[] memory selectorsToExclude = new bytes4[](1);
         selectorsToExclude[0] = Handler.mintDsc.selector;
-        excludeSelector(FuzzSelector({addr: address(handler),selectors: selectorsToExclude}));
+        excludeSelector(FuzzSelector({addr: address(handler), selectors: selectorsToExclude}));
     }
 
     function invariant_protocolMustHaveMoreValueThatTotalSupplyDollars() public view {
@@ -45,10 +45,10 @@ contract Invariants is StdInvariant, Test {
         uint256 wethValue = dsce.getUsdValue(weth, totalWethDeposited);
         uint256 wbtcValue = dsce.getUsdValue(wbtc, totalWbtcDeposited);
 
-        console.log("wethValue: ",wethValue);
-        console.log("wbtcValue: ",wbtcValue);
-        console.log("totalSupply: ",totalSupply);
-        console.log("timesMintIsCalled: ",handler.timesMintIsCalled());
+        console.log("wethValue: ", wethValue);
+        console.log("wbtcValue: ", wbtcValue);
+        console.log("totalSupply: ", totalSupply);
+        console.log("timesMintIsCalled: ", handler.timesMintIsCalled());
 
         assert(wethValue + wbtcValue >= totalSupply);
     }
